@@ -1,19 +1,14 @@
-﻿var client = new HttpClient();
+﻿var token = Environment.GetEnvironmentVariable("TG_TOKEN");
+var chatIdStr = Environment.GetEnvironmentVariable("TG_CHAT_ID");
 
-async Task DoRequest()
+if (chatIdStr == null || token == null)
 {
-    try
-    {
-        var resp = await client.GetAsync("https://learn.microsoft.com/en-us/");
-        resp.EnsureSuccessStatusCode();
-        var body = await resp.Content.ReadAsStringAsync();
-
-        Console.WriteLine(body);
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Exception caught: " + e.Message);
-    }
+    Console.WriteLine("TG_TOKEN and TG_CHAT_ID are not set");
+    return -1;
 }
 
-await DoRequest();
+var chatId = int.Parse(chatIdStr);
+var bot = new TelegramBot(token, chatId);
+await bot.SendMessage("Hello world from C#");
+
+return 0;
