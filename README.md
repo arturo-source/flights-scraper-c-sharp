@@ -9,6 +9,7 @@ I will use as my development enviroment:
 - Linux
 - VSCode
 - Dotnet core
+- C# Dev Kit (VSCode extension)
 
 ## Where to get the data
 
@@ -20,3 +21,6 @@ First I do create the GitHub repository, and download this one in my local machi
 
 Then I execute the following commands: `dotnet new console` to create the basic program, `dotnet new gitignore` because I don't want to upload unnecessary files to GitHub.
 
+Now I want to learn how to fetch data, so I need an HTTP client. I found [System.Net.Http](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-8.0) which seems that I need.
+
+**Note:** I realized that I cannot declare an `async void` function because you cannot do an `await` to void functions. The correct way to do this in C# is `async Task`.
