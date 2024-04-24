@@ -13,3 +13,10 @@ I will use as my development enviroment:
 ## Where to get the data
 
 You can get Ryanair data from <https://www.ryanair.com/api/booking/v4/es-es/availability>.
+
+## Step by step
+
+First I do create the GitHub repository, and download this one in my local machine.
+
+Then I execute the following commands: `dotnet new console` to create the basic program, `dotnet new gitignore` because I don't want to upload unnecessary files to GitHub.
+
