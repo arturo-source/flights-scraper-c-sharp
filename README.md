@@ -11,9 +11,11 @@ I will use as my development enviroment:
 - Dotnet core
 - C# Dev Kit (VSCode extension)
 
-## Where to get the data
+## Endpoints
 
-You can get Ryanair data from <https://www.ryanair.com/api/booking/v4/es-es/availability>.
+Send telegram message by doing a Get request to <https://api.telegram.org/bot{Token}/sendMessage?chat_id={ChatId}&text={msgEncoded}>.
+
+Get Ryanair data from <https://www.ryanair.com/api/booking/v4/es-es/availability>.
 
 ## Step by step
 
@@ -34,3 +36,8 @@ Next step will be sending a message by telegram.
 - Then I need to read environment variables, because of the bot token and chat id. I can use [System.Environment](https://learn.microsoft.com/en-us/dotnet/api/system.environment.getenvironmentvariable?view=net-7.0).
 - But environment variables are strings, and chatId is an integer. The way to convert strings into integers in C# is with `int.Parse`.
 - **Important:** `Environment.GetEnvironmentVariable` return nullable strings, so I must check that variables are not null! Cool compiler.
+
+Next step is to read Telegram response, so I can print if the message did not arrive or any other errors sending the message.
+
+- I decide to create the `Response` class, so I can parse the JSON.
+- As Telegram.cs is growing, I consider a good decision to encapsulate everything into a namespace `Telegram`, so I could call `new Telegram.Bot(_,_)`.

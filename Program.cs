@@ -8,7 +8,11 @@ if (chatIdStr == null || token == null)
 }
 
 var chatId = int.Parse(chatIdStr);
-var bot = new TelegramBot(token, chatId);
-await bot.SendMessage("Hello world from C#");
+var bot = new Telegram.Bot(token, chatId);
+var resp = await bot.SendMessage("Hello world from C#");
+
+Console.WriteLine(resp.ok);
+Console.WriteLine(resp.error_code);
+Console.WriteLine(resp.description);
 
 return 0;
