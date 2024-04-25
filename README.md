@@ -41,3 +41,5 @@ Next step is to read Telegram response, so I can print if the message did not ar
 
 - I decide to create the `Response` class, so I can parse the JSON.
 - As Telegram.cs is growing, I consider a good decision to encapsulate everything into a namespace `Telegram`, so I could call `new Telegram.Bot(_,_)`.
+- **Note:** Class properties must have `{ get; set; }`, to be assignable when reading a JSON.
+- **Note 2:** Public class properties must start with uppercase.

@@ -5,9 +5,9 @@ namespace Telegram;
 
 class Response
 {
-    public bool ok = false;
-    public string error_code = "";
-    public string description = "";
+    public bool Ok { get; set; }
+    public int Error_code { get; set; }
+    public string? Description { get; set; }
 }
 
 class Bot(string token, int chatId)
@@ -18,7 +18,6 @@ class Bot(string token, int chatId)
 
     public async Task<Response?> SendMessage(string msg)
     {
-        var tgResp = new Response();
         var msgEncoded = HttpUtility.UrlEncode(msg);
 
         try

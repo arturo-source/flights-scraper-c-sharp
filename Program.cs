@@ -11,8 +11,14 @@ var chatId = int.Parse(chatIdStr);
 var bot = new Telegram.Bot(token, chatId);
 var resp = await bot.SendMessage("Hello world from C#");
 
-Console.WriteLine(resp.ok);
-Console.WriteLine(resp.error_code);
-Console.WriteLine(resp.description);
+if (resp == null)
+{
+    Console.WriteLine("response from SendTelegram is null");
+    return -1;
+}
+
+Console.WriteLine(resp.Ok);
+Console.WriteLine(resp.Error_code);
+Console.WriteLine(resp.Description);
 
 return 0;
