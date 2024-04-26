@@ -7,9 +7,28 @@ class RyanairScraper
 {
     private readonly HttpClient client = new();
 
-    private async Task<HttpResponseMessage> DoRequest()
+    private async Task<HttpResponseMessage> DoRequest(Dictionary<string, string> queryOptions)
     {
-        var request = new HttpRequestMessage(new HttpMethod("GET"), "https://www.ryanair.com/api/booking/v4/es-es/availability?ADT=1&TEEN=0&CHD=0&INF=0&Origin=FKB&Destination=ALC&promoCode=&IncludeConnectingFlights=false&DateOut=2024-08-23&DateIn=&FlexDaysBeforeOut=0&FlexDaysOut=0&FlexDaysBeforeIn=0&FlexDaysIn=0&RoundTrip=false&ToUs=AGREED");
+        var url = new UriBuilder("https://www.ryanair.com/api/booking/v4/es-es/availability");
+        var defaultQueryOptions = new Dictionary<string, string>(){
+            {"ADT","1"},
+            {"TEEN","0"},
+            {"CHD","0"},
+            {"INF","0"},
+            {"promoCode",""},
+            {"IncludeConnectingFlights","false"},
+            {"DateIn",""},
+            {"FlexDaysBeforeOut","0"},
+            {"FlexDaysOut","0"},
+            {"FlexDaysBeforeIn","0"},
+            {"FlexDaysIn","0"},
+            {"RoundTrip","false"},
+            {"ToUs","AGREED"},
+        };
+        var options = defaultQueryOptions.Union(queryOptions).Select(x => $"{x.Key}={x.Value}");
+        url.Query = String.Join("&", options);
+
+        var request = new HttpRequestMessage(new HttpMethod("GET"), url.ToString());
         request.Headers.TryAddWithoutValidation("accept", "application/json, text/plain, */*");
         request.Headers.TryAddWithoutValidation("accept-language", "es-ES,es;q=0.8");
         request.Headers.TryAddWithoutValidation("cache-control", "no-cache");
@@ -30,9 +49,15 @@ class RyanairScraper
         return await client.SendAsync(request);
     }
 
-    public async Task<string> GetFlightInfo()
+    public async Task<string> GetFlightInfo(string origin, string destination, DateTime date)
     {
-        var resp = await DoRequest();
+        var options = new Dictionary<string, string>(){
+            {"Origin", origin},
+            {"Destination", destination},
+            {"DateOut", date.ToString("yyyy-MM-dd")},
+        };
+
+        var resp = await DoRequest(options);
         var ryanairResp = await resp.Content.ReadFromJsonAsync<RyanairResp>();
         if (ryanairResp == null)
         {

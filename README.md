@@ -51,3 +51,9 @@ The following step is making the call to the travel pages. Let's start with ryan
 - I change the properties first character to upper case because of the compiler warnings.
 - Then I have to transform into a readable string, this is what the user sees.
 - To build the string I use StringBuilder from [System.Text](https://learn.microsoft.com/es-es/dotnet/api/system.text.stringbuilder?view=net-8.0).
+
+Now I must parameterize the options like origin, destination or the day to left.
+
+- I am not able to find an url query builder in the standard library, so I decided to build the url query with a [Dictionary](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0).
+- Then GetFlightInfo receives the origin, the destination, and the date.
+- Working with dates is easy, due to [System.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-8.0). Ryanair needs year-month-day format.
