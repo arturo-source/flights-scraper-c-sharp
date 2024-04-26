@@ -1,0 +1,31 @@
+# ALC: Alicante
+# FKB: Karlsruhe
+# NUE: Nuremberg
+# FMM: Memmingen
+
+- day: 2024-08-23
+  combinations:
+    - origin: FKB
+      destination: ALC
+    - origin: NUE
+      destination: ALC
+    - origin: FMM
+      destination: ALC
+
+- day: 2024-08-24
+  combinations:
+    - origin: FKB
+      destination: ALC
+    - origin: NUE
+      destination: ALC
+    - origin: FMM
+      destination: ALC
+
+- day: 2024-08-25
+  combinations:
+    - origin: FKB
+      destination: ALC
+    - origin: NUE
+      destination: ALC
+    - origin: FMM
+      destination: ALC

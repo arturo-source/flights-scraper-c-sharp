@@ -21,12 +21,32 @@
 // Console.WriteLine(resp.Error_code);
 // Console.WriteLine(resp.Description);
 
-var origin = "FKB";
-var destination = "ALC";
-var date = new DateTime(2024, 08, 23);
+// -----------------
+
+// var origin = "FKB";
+// var destination = "ALC";
+// var date = new DateTime(2024, 08, 23);
+
+// var ryanair = new Travel.RyanairScraper();
+// var info = await ryanair.GetFlightInfo(origin, destination, date);
+// Console.WriteLine(info);
+
+// -----------------
 
 var ryanair = new Travel.RyanairScraper();
-var info = await ryanair.GetFlightInfo(origin, destination, date);
-Console.WriteLine(info);
+var config = Config.Config.ReadFromFile("example.yml");
+
+foreach (var day in config)
+{
+    Console.WriteLine($"{day.Day}:\n");
+    foreach (var combinations in day.Combinations ?? [])
+    {
+        if (combinations.Origin != null && combinations.Destination != null)
+        {
+            var info = await ryanair.GetFlightInfo(combinations.Origin, combinations.Destination, day.Day);
+            Console.WriteLine(info);
+        }
+    }
+}
 
 return 0;

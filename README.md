@@ -57,3 +57,9 @@ Now I must parameterize the options like origin, destination or the day to left.
 - I am not able to find an url query builder in the standard library, so I decided to build the url query with a [Dictionary](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0).
 - Then GetFlightInfo receives the origin, the destination, and the date.
 - Working with dates is easy, due to [System.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-8.0). Ryanair needs year-month-day format.
+
+Next step is introducing the data externally from the program. The options are: scanning user input, introducing as a program arguments, and the best in that case in my opinion, reading from a file. I'll use YAML file to store the flights I want to scrape.
+
+- [System.IO.File](https://learn.microsoft.com/es-es/dotnet/api/system.io.file?view=net-8.0) works pretty fine to read files.
+- But I also want to read the config as YAML, so I cannot only use the standard library.
+- There is a package called [YamlDotNet](https://github.com/aaubry/YamlDotNet) to read and save in YAML format. So the way to install it is running `dotnet add package YamlDotNet`.
