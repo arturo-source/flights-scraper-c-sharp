@@ -43,3 +43,11 @@ Next step is to read Telegram response, so I can print if the message did not ar
 - As Telegram.cs is growing, I consider a good decision to encapsulate everything into a namespace `Telegram`, so I could call `new Telegram.Bot(_,_)`.
 - **Note:** Class properties must have `{ get; set; }`, to be assignable when reading a JSON.
 - **Note 2:** Public class properties must start with uppercase.
+
+The following step is making the call to the travel pages. Let's start with ryanair and after that add some abstractions.
+
+- First let's do the request with the same parameters as the browser. Just the ones of the example (1 adult from Karlsruhe to Alicante on 2024-08-23).
+- Then use <https://json2csharp.com/> to transform the JSON response to C# classes.
+- I change the properties first character to upper case because of the compiler warnings.
+- Then I have to transform into a readable string, this is what the user sees.
+- To build the string I use StringBuilder from [System.Text](https://learn.microsoft.com/es-es/dotnet/api/system.text.stringbuilder?view=net-8.0).
